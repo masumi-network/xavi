@@ -1,0 +1,119 @@
+# Xavi - Video Editing & Social Media Agent
+
+agent_id: xavi
+display_name: Xavi
+
+identity:
+  email_local: null
+  twitter_handle: null
+  teams_bot_id: null
+
+skills:
+  - video-edit
+  - video-animate
+  - video-finalize
+  - pdf
+  - docx
+  - xlsx
+  - pptx
+
+contexts:
+  interactive:
+    model: sonnet
+    max_thinking_tokens: 10000
+    tools:
+      - WebSearch
+      - WebFetch
+      - Read
+      - Write
+      - Edit
+      - Bash
+      - Glob
+      - Grep
+    mcp_servers:
+      - memory
+      - contacts
+      - work
+      - gdrive
+      - sokosumi
+    prompt_layer: triage
+
+  execution:
+    model: opus
+    max_thinking_tokens: 16000
+    tools:
+      - WebSearch
+      - WebFetch
+      - Read
+      - Write
+      - Edit
+      - Bash
+      - Glob
+      - Grep
+      - Skill
+    mcp_servers:
+      - memory
+      - contacts
+      - work
+      - gdrive
+      - sokosumi
+    prompt_layer: execution
+
+  telegram_execution:
+    model: opus
+    max_thinking_tokens: 16000
+    tools:
+      - WebSearch
+      - WebFetch
+      - Read
+      - Write
+      - Edit
+      - Bash
+      - Glob
+      - Grep
+      - Skill
+    mcp_servers:
+      - memory
+      - contacts
+      - work
+      - telegram
+      - gdrive
+      - sokosumi
+    prompt_layer: execution
+
+mcp_servers:
+  memory:
+    enabled: true
+  contacts:
+    enabled: true
+  work:
+    enabled: true
+  gdrive:
+    enabled: true
+  sokosumi:
+    enabled: true
+  telegram:
+    enabled: true
+
+interfaces:
+  completions:
+    enabled: true
+    default_context: interactive
+  responses:
+    enabled: true
+    default_context: interactive
+  sokosumi:
+    enabled: true
+    default_context: execution
+  telegram:
+    enabled: true
+    default_context: interactive
+
+capabilities:
+  agent_execution: false
+  document_creation: true
+
+memory:
+  isolated: true
+
+owner_user_id: albina.nikiforova@nmkr.io
